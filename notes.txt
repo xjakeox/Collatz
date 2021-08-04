@@ -1,0 +1,11 @@
+* odd = multiply by 3 and add 1
+* even = divide by 2
+Will end at 1
+
+Pick an amount of numbers
+Pick the range
+
+Until the amount of numbers has been picked:
+    Pick a number and increase the current amount of items picked
+    With that number, send it into a solve Loop
+    Until solved (no == 1)
