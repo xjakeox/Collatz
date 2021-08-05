@@ -1,10 +1,10 @@
-import random
+
 import csv
 
 vNum = "1.0"
-print("Collatz Conjecture Random Test Case Emulator " + vNum)
+print("Collatz Conjecture Sequential Test Case Emulator " + vNum)
 
-with open('results.csv', 'w', newline='') as file:
+with open('collatzseq.csv', 'w', newline='') as file:
     fieldnames = ['Test_Number', 'Starting_Num', 'End_Num', 'Steps', 'Sequence']
     writer = csv.DictWriter(file, fieldnames=fieldnames)
     writer.writeheader()
@@ -13,26 +13,26 @@ strtests = input("How many test cases should be run?")
 tests = int(strtests)
 strrangelow = input("Where should the range start?")
 rangelow = int(strrangelow)
-strrangehigh = input("Where should the range end?")
-rangehigh = int(strrangehigh)
 global curTest
 
 
 def writetoCSV(testno, startingNo, solveNo, steps, seq):
-    with open('results.csv', 'a', newline='') as file:
+    with open('collatzseq.csv', 'a', newline='') as file:
         fieldnames = ['Test_Number', 'Starting_Num', 'End_Num', 'Steps', 'Sequence']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writerow({'Test_Number': testno, 'Starting_Num': startingNo, 'End_Num': solveNo,
                          'Steps': steps, 'Sequence': seq})
 
 
-def runTest(noTests, low, high):
+def runTest(noTests, low):
     global curTest
-    curTest = 0
-    while curTest < noTests:
-        startingNo = random.randint(low, high)
-        curTest = curTest + 1
+    curTest = 1
+    startingNo = low
+
+    for x in range(0, noTests):
         solveTestCase(curTest, startingNo)
+        startingNo = startingNo + 1
+        curTest = curTest + 1
 
 
 def solveTestCase(testno, solveNo):
@@ -58,4 +58,4 @@ def solveTestCase(testno, solveNo):
     writetoCSV(testno, startingNo, solveNo, steps, seq)
 
 
-runTest(tests, rangelow, rangehigh)
+runTest(tests, rangelow)
